@@ -1,7 +1,15 @@
 package logger
 
-import "log"
+import (
+	"log"
+	"os"
+)
 
-func Logger(message string) {
-	log.Println(message)
+var (
+	// Global — глобальный логгер для всего проекта
+	Global *log.Logger
+)
+
+func init() {
+	Global = log.New(os.Stdout, "", log.LstdFlags)
 }
