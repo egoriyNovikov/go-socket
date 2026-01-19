@@ -26,7 +26,7 @@ func (c *Client) ReadMessages() {
 		if err := c.conn.ReadJSON(&msg); err != nil {
 			return
 		}
-		c.hub.broadcast <- &msg
+		c.hub.Broadcast(&msg)
 	}
 }
 

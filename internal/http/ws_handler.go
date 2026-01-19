@@ -22,9 +22,11 @@ func ServerWS(w http.ResponseWriter, r *http.Request, hub *ws.Hub) {
 		logger.Global.Println("Failed to upgrade to WebSocket:", err)
 		return
 	}
+	logger.Global.Printf("New WebSocket connection from %s", r.RemoteAddr)
 
 	client := ws.NewClient(conn, hub)
 	hub.Register(client)
+	logger.Global.Println("Client registered")
 	go client.ReadMessages()
 	go client.WriteMessages()
 }

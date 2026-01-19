@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Go WebSocket Chat</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <div class="title">
+        <h1>WebSocket Chat</h1>
+        <p class="subtitle">Go + Gorilla WebSocket (MVP)</p>
+      </div>
+      <div class="status">
+        <span class="dot" id="statusDot" aria-hidden="true"></span>
+        <span id="statusText">offline</span>
+      </div>
+    </header>
+
+    <section class="panel">
+      <div class="row">
+        <label class="field">
+          <span>Имя</span>
+          <input id="name" type="text" placeholder="Egor" autocomplete="nickname" maxlength="32">
+        </label>
+        <label class="field">
+          <span>WS путь</span>
+          <input id="wsPath" type="text" placeholder="/ws" maxlength="64">
+        </label>
+        <button id="connectBtn" class="btn">Подключиться</button>
+      </div>
+
+      <div class="chat">
+        <div class="messages" id="messages" aria-live="polite"></div>
+      </div>
+
+      <form class="row" id="form">
+        <label class="field grow">
+          <span>Сообщение</span>
+          <input id="text" type="text" placeholder="Напиши сообщение..." autocomplete="off" maxlength="1000">
+        </label>
+        <button id="sendBtn" class="btn primary" type="submit">Отправить</button>
+      </form>
+    </section>
+
+    <footer class="footer">
+      <div class="hint">
+        Подсказка: сервер по умолчанию слушает <code>/ws</code>. Если менял env — укажи путь тут.
+      </div>
+    </footer>
+  </main>
+
+  <script src="./script.js"></script>
+</body>
+</html>
