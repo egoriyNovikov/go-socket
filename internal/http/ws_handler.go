@@ -1,9 +1,9 @@
 package http
 
 import (
-	"log"
 	"net/http"
 
+	"github.com/go-socket/internal/logger"
 	"github.com/go-socket/internal/ws"
 	"github.com/gorilla/websocket"
 )
@@ -16,16 +16,15 @@ var upgrader = websocket.Upgrader{
 	},
 }
 
-func ServerWS(w http.ResponseWriter, r *http.Request) {
+func ServerWS(w http.ResponseWriter, r *http.Request, hub *ws.Hub) {
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
-		log.Println("Failed to upgrade to WebSocket:", err)
+		logger.Global.Println("Failed to upgrade to WebSocket:", err)
 		return
 	}
-	defer conn.Close()
 
-	hub := ws.NewHub()
 	client := ws.NewClient(conn, hub)
+	hub.Register(client)
 	go client.ReadMessages()
 	go client.WriteMessages()
 }

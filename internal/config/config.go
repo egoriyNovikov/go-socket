@@ -51,7 +51,7 @@ func LoadConfig() *Config {
 		protocol = "http"
 	}
 
-	path := os.Getenv("PATH")
+	path := os.Getenv("WS_PATH")
 	if path == "" {
 		path = "/ws"
 	}
